@@ -1,72 +1,30 @@
-import React from "react"
-import { Link, graphql } from "gatsby"
-
-import Bio from "../components/bio"
-import Layout from "../components/layout"
-import SEO from "../components/seo"
-import { rhythm } from "../utils/typography"
-
-const BlogIndex = ({ data, location }) => {
-  const siteTitle = data.site.siteMetadata.title
-  const posts = data.allMarkdownRemark.edges
-
-  return (
-    <Layout location={location} title={siteTitle}>
-      <SEO title="All posts" />
-      <Bio />
-      {posts.map(({ node }) => {
-        const title = node.frontmatter.title || node.fields.slug
-        return (
-          <article key={node.fields.slug}>
-            <header>
-              <h3
-                style={{
-                  marginBottom: rhythm(1 / 4),
-                }}
-              >
-                <Link style={{ boxShadow: `none` }} to={node.fields.slug}>
-                  {title}
-                </Link>
-              </h3>
-              <small>{node.frontmatter.date}</small>
-            </header>
-            <section>
-              <p
-                dangerouslySetInnerHTML={{
-                  __html: node.frontmatter.description || node.excerpt,
-                }}
-              />
-            </section>
-          </article>
-        )
-      })}
-    </Layout>
-  )
-}
-
-export default BlogIndex
-
-export const pageQuery = graphql`
-  query {
-    site {
-      siteMetadata {
-        title
-      }
-    }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
-      edges {
-        node {
-          excerpt
-          fields {
-            slug
-          }
-          frontmatter {
-            date(formatString: "MMMM DD, YYYY")
-            title
-            description
-          }
-        }
-      }
-    }
-  }
-`
+import React from "react";
+import theme from "theme";
+import { Theme } from "@quarkly/widgets";
+import { Override, Section } from "@quarkly/components";
+import * as Components from "components";
+export default (() => {
+	return <Theme theme={theme}>
+		<Section padding="140px 0" sm-padding="40px 0" background="url(https://images.unsplash.com/photo-1515600051222-a3c338ff16f6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80) center/cover">
+			<Components.Adasd background="#296db1">
+				<Override slot="text2">
+					asdas
+				</Override>
+				<Override slot="text">
+					sadasd
+				</Override>
+				<Override slot="text1">
+					asdasdad
+				</Override>
+			</Components.Adasd>
+			<Components.Adasd>
+				<Override slot="text2">
+					asdas
+				</Override>
+				<Override slot="text">
+					sadasd
+				</Override>
+			</Components.Adasd>
+		</Section>
+	</Theme>;
+});
